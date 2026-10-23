@@ -1,0 +1,401 @@
+/* ===== Tema: sala de aula noturna com neon ===== */
+:root {
+    --bg: #080a1a;
+    --bg-2: #0e1230;
+    --painel: rgba(16, 20, 52, 0.85);
+    --texto: #e8ecff;
+    --texto-suave: #a9b2e0;
+    --ciano: #00f0ff;
+    --magenta: #ff2bd6;
+    --lima: #b6ff3b;
+    --amarelo: #ffe14d;
+    --erro: #ff5470;
+    --raio: 18px;
+    --fonte-titulo: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+    --fonte-texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+ 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+ 
+[hidden] {
+    display: none !important;
+}
+ 
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    font-family: var(--fonte-texto);
+    color: var(--texto);
+    background: radial-gradient(circle at 20% 0%, #1a1450 0%, var(--bg) 55%);
+    position: relative;
+    overflow-x: hidden;
+}
+ 
+/* fundo de caderno quadriculado */
+.fundo-caderno {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+        linear-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(circle at center, #000 30%, transparent 85%);
+    -webkit-mask-image: radial-gradient(circle at center, #000 30%, transparent 85%);
+}
+ 
+/* margem vermelha de caderno */
+.fundo-caderno::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 6%;
+    width: 2px;
+    background: rgba(255, 43, 214, 0.35);
+    box-shadow: 0 0 10px rgba(255, 43, 214, 0.5);
+}
+ 
+/* ===== Caixa principal ===== */
+.caixa-principal {
+    width: 100%;
+    max-width: 760px;
+    background: var(--painel);
+    border: 2px solid var(--ciano);
+    border-radius: var(--raio);
+    padding: 32px clamp(18px, 4vw, 40px);
+    box-shadow:
+        0 0 12px rgba(0, 240, 255, 0.6),
+        0 0 40px rgba(0, 240, 255, 0.2),
+        inset 0 0 30px rgba(0, 240, 255, 0.06);
+    backdrop-filter: blur(6px);
+    animation: surgir 0.6s ease both;
+}
+ 
+.cabecalho {
+    text-align: center;
+    margin-bottom: 22px;
+}
+ 
+.selo {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--amarelo);
+    border: 1.5px dashed var(--amarelo);
+    border-radius: 999px;
+    padding: 4px 14px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 8px rgba(255, 225, 77, 0.7);
+}
+ 
+h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    line-height: 1.1;
+}
+ 
+.neon {
+    color: var(--magenta);
+    text-shadow:
+        0 0 6px rgba(255, 43, 214, 0.9),
+        0 0 18px rgba(255, 43, 214, 0.7),
+        0 0 36px rgba(255, 43, 214, 0.5);
+    animation: piscar 4s infinite;
+}
+ 
+.subtitulo {
+    font-family: var(--fonte-titulo);
+    text-align: center;
+    color: var(--lima);
+    text-shadow: 0 0 10px rgba(182, 255, 59, 0.6);
+    margin: 22px 0 14px;
+}
+ 
+.historia {
+    color: var(--texto-suave);
+    line-height: 1.7;
+    text-align: justify;
+    border-left: 3px solid var(--magenta);
+    padding-left: 14px;
+}
+ 
+/* ===== Escolha do público ===== */
+.escolha-publico {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+ 
+.cartao-publico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 20px 12px;
+    font-family: inherit;
+    color: var(--texto);
+    background: var(--bg-2);
+    border: 2px solid var(--lima);
+    border-radius: var(--raio);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 10px rgba(182, 255, 59, 0.35);
+}
+ 
+.cartao-publico[data-publico="pais"] {
+    border-color: var(--amarelo);
+    box-shadow: 0 0 10px rgba(255, 225, 77, 0.35);
+}
+ 
+.cartao-publico .icone {
+    font-size: 2.4rem;
+}
+ 
+.cartao-publico strong {
+    font-family: var(--fonte-titulo);
+    font-size: 1.15rem;
+}
+ 
+.cartao-publico small {
+    color: var(--texto-suave);
+}
+ 
+.cartao-publico:hover,
+.cartao-publico:focus-visible {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 0 22px rgba(182, 255, 59, 0.75);
+    outline: none;
+}
+ 
+.cartao-publico[data-publico="pais"]:hover,
+.cartao-publico[data-publico="pais"]:focus-visible {
+    box-shadow: 0 0 22px rgba(255, 225, 77, 0.75);
+}
+ 
+/* ===== Quiz ===== */
+.topo-quiz {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+ 
+.etiqueta-publico {
+    color: var(--ciano);
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.7);
+}
+ 
+.contador {
+    color: var(--texto-suave);
+}
+ 
+.barra {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 22px;
+}
+ 
+.barra-preenchida {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--ciano), var(--magenta));
+    box-shadow: 0 0 12px var(--ciano);
+    transition: width 0.4s ease;
+}
+ 
+.caixa-perguntas {
+    font-family: var(--fonte-titulo);
+    font-size: clamp(1.2rem, 3.4vw, 1.6rem);
+    line-height: 1.35;
+    margin-bottom: 20px;
+}
+ 
+.caixa-alternativas {
+    display: grid;
+    gap: 12px;
+}
+ 
+.alternativa {
+    text-align: left;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--texto);
+    background: var(--bg-2);
+    border: 2px solid rgba(0, 240, 255, 0.5);
+    border-radius: 14px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+}
+ 
+.alternativa:hover:not(:disabled),
+.alternativa:focus-visible {
+    transform: translateX(6px);
+    border-color: var(--ciano);
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.6);
+    outline: none;
+}
+ 
+.alternativa:disabled {
+    cursor: default;
+    opacity: 0.45;
+}
+ 
+.alternativa.escolhida {
+    opacity: 1;
+    border-color: var(--magenta);
+    box-shadow: 0 0 18px rgba(255, 43, 214, 0.7);
+    background: rgba(255, 43, 214, 0.12);
+}
+ 
+.caixa-consequencia {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 14px;
+    border: 2px dashed var(--amarelo);
+    background: rgba(255, 225, 77, 0.06);
+    animation: surgir 0.4s ease both;
+}
+ 
+.caixa-consequencia p {
+    line-height: 1.6;
+    margin-bottom: 14px;
+}
+ 
+/* ===== Botões ===== */
+.btn {
+    font-family: var(--fonte-titulo);
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #06081a;
+    background: var(--ciano);
+    border: none;
+    border-radius: 999px;
+    padding: 12px 28px;
+    cursor: pointer;
+    box-shadow: 0 0 16px rgba(0, 240, 255, 0.8);
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+ 
+.btn:hover,
+.btn:focus-visible {
+    transform: scale(1.05);
+    box-shadow: 0 0 28px rgba(0, 240, 255, 1);
+    outline: none;
+}
+ 
+.btn-secundario {
+    background: transparent;
+    color: var(--magenta);
+    border: 2px solid var(--magenta);
+    box-shadow: 0 0 12px rgba(255, 43, 214, 0.6);
+}
+ 
+.btn-secundario:hover,
+.btn-secundario:focus-visible {
+    box-shadow: 0 0 24px rgba(255, 43, 214, 1);
+}
+ 
+/* ===== Resultado ===== */
+.caixa-resultado {
+    text-align: center;
+}
+ 
+.titulo-resultado {
+    font-family: var(--fonte-titulo);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--lima);
+    text-shadow: 0 0 12px rgba(182, 255, 59, 0.8);
+    margin-bottom: 8px;
+}
+ 
+.pontuacao {
+    font-weight: 700;
+    color: var(--amarelo);
+    margin-bottom: 16px;
+}
+ 
+.texto-resultado {
+    line-height: 1.7;
+    color: var(--texto-suave);
+    margin-bottom: 24px;
+    text-align: justify;
+}
+ 
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+ 
+/* ===== Rodapé ===== */
+.rodape {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+ 
+/* ===== Animações ===== */
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+ 
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+@keyframes piscar {
+ 
+    0%,
+    92%,
+    96%,
+    100% {
+        opacity: 1;
+    }
+ 
+    94%,
+    98% {
+        opacity: 0.55;
+    }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+ 
+/* ===== Responsivo ===== */
+@media (max-width: 520px) {
+    .escolha-publico {
+        grid-template-columns: 1fr;
+    }
+ 
+    .historia,
+    .texto-resultado {
+        text-align: left;
+    }
+}
