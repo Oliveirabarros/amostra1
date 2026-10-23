@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quiz interativo para alunos do ensino fundamental e para pais sobre o impacto da Inteligência Artificial.">
+    <title>Você decide o futuro da IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="fundo-caderno" aria-hidden="true"></div>
+
+    <main class="caixa-principal">
+        <header class="cabecalho">
+            <span class="selo" aria-hidden="true">✏️ Aula especial</span>
+            <h1>Você decide o <span class="neon">futuro da IA</span></h1>
+        </header>
+
+        <!-- TELA INICIAL -->
+        <section class="tela tela-inicial" id="tela-inicial">
+            <p class="historia">
+                Novembro de 2022, a humanidade se viu em uma realidade perturbadora.
+                De repente, percebemos que as máquinas evoluíram para além do que imaginávamos.
+                Agora, elas escrevem e falam de um jeito tão parecido com humanos que é quase impossível diferenciar
+                quem foi que escreveu ou falou o que.
+                Em meio a esse caos de identidade, uma missão surgiu.
+                Nosso objetivo: explorar o impacto da Inteligência Artificial (IA) em nossas vidas e confrontar as
+                possibilidades que o futuro nos reserva.
+                O mundo nunca mais será o mesmo.
+            </p>
+
+            <h2 class="subtitulo">Quem vai jogar?</h2>
+            <div class="escolha-publico">
+                <button class="cartao-publico" data-publico="alunos">
+                    <span class="icone" aria-hidden="true">🎒</span>
+                    <strong>Sou aluno</strong>
+                    <small>Ensino Fundamental</small>
+                </button>
+                <button class="cartao-publico" data-publico="pais">
+                    <span class="icone" aria-hidden="true">👨‍👩‍👧</span>
+                    <strong>Sou pai / responsável</strong>
+                    <small>Decisões em família</small>
+                </button>
+            </div>
+        </section>
+
+        <!-- TELA DO QUIZ -->
+        <section class="tela tela-quiz" id="tela-quiz" hidden>
+            <div class="topo-quiz">
+                <span class="etiqueta-publico" id="etiqueta-publico"></span>
+                <span class="contador" id="contador"></span>
+            </div>
+            <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="barra">
+                <div class="barra-preenchida" id="barra-preenchida"></div>
+            </div>
+
+            <h2 class="caixa-perguntas" id="pergunta"></h2>
+            <div class="caixa-alternativas" id="alternativas"></div>
+
+            <div class="caixa-consequencia" id="consequencia" hidden aria-live="polite">
+                <p id="texto-consequencia"></p>
+                <button class="btn" id="btn-proxima">Próxima</button>
+            </div>
+        </section>
+
+        <!-- TELA DE RESULTADO -->
+        <section class="tela caixa-resultado" id="tela-resultado" hidden>
+            <h2 class="titulo-resultado" id="titulo-resultado"></h2>
+            <p class="pontuacao" id="pontuacao"></p>
+            <p class="texto-resultado" id="texto-resultado"></p>
+            <div class="acoes">
+                <button class="btn" id="btn-novamente">Jogar novamente</button>
+                <button class="btn btn-secundario" id="btn-trocar">Trocar de público</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="rodape">Projeto educativo · Use a IA com responsabilidade 💡</footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
